@@ -21,7 +21,8 @@ namespace CodePound.PunchOutCalculator.WebApplication.Controllers
                     DateTime.Parse(request.PunchIn),
                     DateTime.Parse(request.LunchOut),
                     DateTime.Parse(request.LunchIn),
-                    Convert.ToInt32(request.TargetTotalMinutes));
+                    Convert.ToInt32(request.TargetTotalMinutes),
+                    Convert.ToBoolean(request.IsLunchOverrideEnabled));
 
                 return cruncher.PunchOut.ToString();
             }

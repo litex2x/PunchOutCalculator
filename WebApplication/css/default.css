@@ -6,7 +6,8 @@
 .button,
 .loading,
 .results,
-.separator {
+.separator,
+.override {
     display: block;
     float: left;
     margin-top: 5px;

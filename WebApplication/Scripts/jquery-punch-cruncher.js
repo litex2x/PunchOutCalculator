@@ -10,7 +10,8 @@ $(document).ready(function () {
         var lunchOutString = currentDate.toDateString() + ' ' + $('.lunch-out .hour').val() + ':' + $('.lunch-out .minute').val() + ' ' + $('.lunch-out .ampm').val();
         var lunchInString = currentDate.toDateString() + ' ' + $('.lunch-in .hour').val() + ':' + $('.lunch-in .minute').val() + ' ' + $('.lunch-in .ampm').val();
         var targetTotalMinutes = parseInt($('.total-hours .hour').val()) + parseInt($('.total-hours .partial-hour').val());
-        
+        var override = $('.override input').prop('checked');
+
         $.ajax({
             type: 'POST',
             url:'/PunchOutCalculator/api/calculation',
@@ -18,7 +19,8 @@ $(document).ready(function () {
                 PunchIn: punchInString,
                 LunchOut: lunchOutString,
                 LunchIn: lunchInString,
-                TargetTotalMinutes: targetTotalMinutes
+                TargetTotalMinutes: targetTotalMinutes,
+                IsLunchOverrideEnabled: override
             }),
             complete: function (jqXHR, textStatus) {
                 $('.loading').hide();
