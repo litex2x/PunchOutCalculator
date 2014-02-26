@@ -45,25 +45,25 @@ $(document).ready(function () {
             dataType: 'json',
             contentType: 'application/json'
         });
+    });
 
-        $('#reset-button').click(function () {
-            $('.punch-in .hour').val("8");
-            $('.punch-in .minute').val("00");
-            $('.punch-in .ampm').val("AM");
-            $('.lunch-in .hour').val("12");
-            $('.lunch-in .minute').val("30");
-            $('.lunch-in .ampm').val("PM");
-            $('.lunch-out .hour').val("12");
-            $('.lunch-out .minute').val("00");
-            $('.lunch-out .ampm').val("PM");
-            $('.total-hours .hour').val('480');
-            $('.total-hours .partial-hour').val('0');
-            $('.results .message').text('');
-            $('.results').hide();
-        });
+    $('#reset-button').click(function () {
+        $('.punch-in .hour').val("8");
+        $('.punch-in .minute').val("00");
+        $('.punch-in .ampm').val("AM");
+        $('.lunch-in .hour').val("12");
+        $('.lunch-in .minute').val("30");
+        $('.lunch-in .ampm').val("PM");
+        $('.lunch-out .hour').val("12");
+        $('.lunch-out .minute').val("00");
+        $('.lunch-out .ampm').val("PM");
+        $('.total-hours .hour').val('480');
+        $('.total-hours .partial-hour').val('0');
+        $('.results .message').text('');
+        $('.results').hide();
+    });
 
-        $('.help').click(function () {
-            window.location = 'pdf/novatime.pdf';
-        });
+    $('.help').click(function () {
+        window.location = 'pdf/novatime.pdf';
     });
 });
