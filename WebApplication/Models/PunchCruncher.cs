@@ -40,6 +40,11 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
         {
             get
             {
+                if (AdjustedLunchDuration < 30)
+                {
+                    throw new ApplicationException("Lunch punch in is too low");
+                }
+
                 return AdjustedLunchOut.AddMinutes(AdjustedLunchDuration);
             }
         }
