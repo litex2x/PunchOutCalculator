@@ -67,6 +67,6 @@ $(document).ready(function () {
     });
 
     $('.help').click(function () {
-        window.location = 'pdf/novatime.pdf';
+        window.location = window.location + '/pdf/novatime.pdf';
     });
 });
