@@ -10,5 +10,6 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
         public string PunchIn { get; set; }
         public string LunchOut { get; set; }
         public string LunchIn { get; set; }
+        public string TargetTotalMinutes { get; set; }
     }
 }

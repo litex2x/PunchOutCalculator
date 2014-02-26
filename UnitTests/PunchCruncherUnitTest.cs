@@ -13,7 +13,8 @@ namespace CodePound.PunchOutCalculator.PunchOutCalculatorUnitTest
             PunchCruncher cruncher = new PunchCruncher( 
                 DateTime.Parse(string.Format("{0} 7:55 AM", DateTime.Now.ToShortDateString())),
                 DateTime.Parse(string.Format("{0} 12:20 PM", DateTime.Now.ToShortDateString())),
-                DateTime.Parse(string.Format("{0} 1:27 PM", DateTime.Now.ToShortDateString())));
+                DateTime.Parse(string.Format("{0} 1:27 PM", DateTime.Now.ToShortDateString())),
+                480);
 
             Assert.AreEqual(60, cruncher.AdjustedLunchDuration);
             Assert.AreEqual(67, cruncher.LunchDuration);

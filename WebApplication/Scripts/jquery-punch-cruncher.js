@@ -9,6 +9,7 @@ $(document).ready(function () {
         var punchInString = currentDate.toDateString() + ' ' + $('.punch-in .hour').val() + ':' + $('.punch-in .minute').val() + ' ' + $('.punch-in .ampm').val();
         var lunchOutString = currentDate.toDateString() + ' ' + $('.lunch-out .hour').val() + ':' + $('.lunch-out .minute').val() + ' ' + $('.lunch-out .ampm').val();
         var lunchInString = currentDate.toDateString() + ' ' + $('.lunch-in .hour').val() + ':' + $('.lunch-in .minute').val() + ' ' + $('.lunch-in .ampm').val();
+        var targetTotalMinutes = parseInt($('.total-hours .hour').val()) + parseInt($('.total-hours .partial-hour').val());
 
         $('.results').show();
 
@@ -18,19 +19,11 @@ $(document).ready(function () {
             data: JSON.stringify({
                 PunchIn: punchInString,
                 LunchOut: lunchOutString,
-                LunchIn: lunchInString
+                LunchIn: lunchInString,
+                TargetTotalMinutes: targetTotalMinutes
             }),
             complete: function (jqXHR, textStatus) {
                 $('.loading').hide();
-                $('.punch-in .hour').val("12");
-                $('.punch-in .minute').val("00");
-                $('.punch-in .ampm').val("AM");
-                $('.lunch-in .hour').val("12");
-                $('.lunch-in .minute').val("00");
-                $('.lunch-in .ampm').val("AM");
-                $('.lunch-out .hour').val("12");
-                $('.lunch-out .minute').val("00");
-                $('.lunch-out .ampm').val("AM");
             },
             beforeSend: function (jqXHR, settings) {
                 $('.loading').show();
@@ -50,6 +43,21 @@ $(document).ready(function () {
             },
             dataType: 'json',
             contentType: 'application/json'
+        });
+
+        $('#reset-button').click(function () {
+            $('.punch-in .hour').val("8");
+            $('.punch-in .minute').val("00");
+            $('.punch-in .ampm').val("AM");
+            $('.lunch-in .hour').val("12");
+            $('.lunch-in .minute').val("30");
+            $('.lunch-in .ampm').val("PM");
+            $('.lunch-out .hour').val("12");
+            $('.lunch-out .minute').val("00");
+            $('.lunch-out .ampm').val("PM");
+            $('.total-hours .hour').val('480');
+            $('.total-hours .partial-hour').val('0');
+            $('.results').text('');
         });
     });
 });

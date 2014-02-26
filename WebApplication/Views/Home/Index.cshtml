@@ -13,9 +13,9 @@
     <script src="~/Scripts/jquery-punch-cruncher.js"></script>
 </head>
 <body>
-    <h2>Punch Out Calculator</h2>
-    <div class="punch-in">
-        <span>Punch In: </span>
+    <a href="http://www.github.com/litex2x/PunchOutCalculator" class="header">Punch Out Calculator</a>
+    <div class="punch-in clear">
+        <span class="label">Punch In: </span>
         <select class="hour">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -24,12 +24,13 @@
             <option value="5">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
-            <option value="8">8</option>
+            <option value="8" selected>8</option>
             <option value="9">9</option>
             <option value="10">10</option>
             <option value="11">11</option>
-            <option value="12" selected>12</option>
+            <option value="12">12</option>
         </select>
+        <span class="separator">:</span>
         <select class="minute">
             <option value="00">00</option>
             <option value="01">01</option>
@@ -97,8 +98,8 @@
             <option value="PM">PM</option>
         </select>
     </div>
-    <div class="lunch-out">
-        <span>Lunch Out:</span>
+    <div class="lunch-out clear">
+        <span class="label">Lunch Out:</span>
         <select class="hour">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -113,6 +114,7 @@
             <option value="11">11</option>
             <option value="12" selected>12</option>
         </select>
+        <span class="separator">:</span>
         <select class="minute">
             <option value="00">00</option>
             <option value="01">01</option>
@@ -177,11 +179,11 @@
         </select>
         <select class="ampm">
             <option value="AM">AM</option>
-            <option value="PM">PM</option>
+            <option value="PM" selected>PM</option>
         </select>
     </div>
-    <div class="lunch-in">
-        <span>Lunch In:</span>
+    <div class="lunch-in clear">
+        <span class="label">Lunch In:</span>
         <select class="hour">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -196,6 +198,7 @@
             <option value="11">11</option>
             <option value="12" selected>12</option>
         </select>
+        <span class="separator">:</span>
         <select class="minute">
             <option value="00">00</option>
             <option value="01">01</option>
@@ -227,7 +230,7 @@
             <option value="27">27</option>
             <option value="28">28</option>
             <option value="29">29</option>
-            <option value="30">30</option>
+            <option value="30" selected>30</option>
             <option value="31">31</option>
             <option value="32">32</option>
             <option value="33">33</option>
@@ -260,10 +263,29 @@
         </select>
         <select class="ampm">
             <option value="AM">AM</option>
-            <option value="PM">PM</option>
+            <option value="PM" selected>PM</option>
         </select>
     </div>
-    <input id="calculate-button" type="button" value="Calculate" /><img src="~/img/loading.gif" class="loading" />
-    <span class="results"></span>
+    <div class="total-hours clear">
+        <span class="label">Total Hours:</span>
+        <select class="hour">
+            <option value="480">8</option>
+            <option value="540">9</option>
+            <option value="600">10</option>
+            <option value="660">11</option>
+            <option value="720">12</option>
+            <option value="780">13</option>
+        </select>
+        <span class="separator">.</span>
+        <select class="partial-hour">
+            <option value="0">00</option>
+            <option value="15">25</option>
+            <option value="30">50</option>
+            <option value="45">75</option>
+        </select>
+    </div>
+    <input id="calculate-button" class="button clear" type="button" value="Calculate" /><img src="~/img/loading.gif" class="loading" />
+    <input id="reset-button" class="button clear" type="button" value="Reset" />
+    <span class="results clear"></span>
 </body>
 </html>

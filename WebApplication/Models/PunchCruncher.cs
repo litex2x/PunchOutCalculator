@@ -49,7 +49,7 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
         {
             get
             {
-                return TimeSpan.FromHours(8) - CurrentTotal;
+                return TimeSpan.FromMinutes(TargetTotalMinutes) - CurrentTotal;
             }
         }
         public int LunchDuration
@@ -68,12 +68,14 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
                 return LunchDuration + GetMinuteAdjustment(LunchDuration);
             }
         }
+        public int TargetTotalMinutes { get; set; }
 
-        public PunchCruncher(DateTime punchIn, DateTime lunchOut, DateTime lunchIn)
+        public PunchCruncher(DateTime punchIn, DateTime lunchOut, DateTime lunchIn, int targetTotalMinutes)
         {
             PunchIn = punchIn;
             LunchOut = lunchOut;
             LunchIn = lunchIn;
+            TargetTotalMinutes = targetTotalMinutes;
 
             if (LunchOut <= PunchIn)
             {
@@ -86,6 +88,10 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
             else if (CurrentTotal >= TimeSpan.FromHours(8))
             {
                 throw new ApplicationException("Already have 8 hours.");
+            }
+            else if (TargetTotalMinutes > 780)
+            {
+                throw new ApplicationException("Target total hours must be less than 13 hours.");
             }
         }
 

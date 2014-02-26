@@ -20,7 +20,8 @@ namespace CodePound.PunchOutCalculator.WebApplication.Controllers
                 cruncher = new PunchCruncher(
                     DateTime.Parse(request.PunchIn),
                     DateTime.Parse(request.LunchOut),
-                    DateTime.Parse(request.LunchIn));
+                    DateTime.Parse(request.LunchIn),
+                    Convert.ToInt32(request.TargetTotalMinutes));
 
                 return cruncher.PunchOut.ToString();
             }
