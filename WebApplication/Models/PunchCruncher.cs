@@ -14,6 +14,11 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
         {
             get
             {
+                if (MissingTotal > TimeSpan.FromHours(5))
+                {
+                    throw new ApplicationException("Target total amount of hours is too high.");
+                }
+
                 return AdjustedLunchIn.Add(MissingTotal - TimeSpan.FromMinutes(7));
             }
         }
@@ -49,6 +54,11 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
         {
             get
             {
+                if (CurrentTotal > TimeSpan.FromHours(5))
+                {
+                    throw new ApplicationException("Lunch punch out is too high");
+                }
+
                 return TimeSpan.FromMinutes(TargetTotalMinutes) - CurrentTotal;
             }
         }
@@ -89,9 +99,9 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
             {
                 throw new ApplicationException("Already have 8 hours.");
             }
-            else if (TargetTotalMinutes > 780)
+            else if (TargetTotalMinutes > 600)
             {
-                throw new ApplicationException("Target total hours must be less than 13 hours.");
+                throw new ApplicationException("Target total hours must be less than 10 hours.");
             }
         }
 

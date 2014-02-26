@@ -10,9 +10,7 @@ $(document).ready(function () {
         var lunchOutString = currentDate.toDateString() + ' ' + $('.lunch-out .hour').val() + ':' + $('.lunch-out .minute').val() + ' ' + $('.lunch-out .ampm').val();
         var lunchInString = currentDate.toDateString() + ' ' + $('.lunch-in .hour').val() + ':' + $('.lunch-in .minute').val() + ' ' + $('.lunch-in .ampm').val();
         var targetTotalMinutes = parseInt($('.total-hours .hour').val()) + parseInt($('.total-hours .partial-hour').val());
-
-        $('.results').show();
-
+        
         $.ajax({
             type: 'POST',
             url:'/PunchOutCalculator/api/calculation',
@@ -24,22 +22,25 @@ $(document).ready(function () {
             }),
             complete: function (jqXHR, textStatus) {
                 $('.loading').hide();
+                $('.results').show();
             },
             beforeSend: function (jqXHR, settings) {
                 $('.loading').show();
+                $('.results .message').text('');
+                $('.results').hide();
             },
             success: function (data, textStatus, jqXHR) {
                 var punchOut = new Date(data);
 
                 if (punchOut == 'Invalid Date') {
-                    $('.results').text(data);
+                    $('.results .message').text(data);
                 }
                 else {
-                    $('.results').text('Punch out at ' + punchOut.toLocaleTimeString());
+                    $('.results .message').text('Punch out at ' + punchOut.toLocaleTimeString());
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('.results').text('Internal error!');
+                $('.results .message').text('Internal error!');
             },
             dataType: 'json',
             contentType: 'application/json'
@@ -57,7 +58,12 @@ $(document).ready(function () {
             $('.lunch-out .ampm').val("PM");
             $('.total-hours .hour').val('480');
             $('.total-hours .partial-hour').val('0');
-            $('.results').text('');
+            $('.results .message').text('');
+            $('.results').hide();
+        });
+
+        $('.help').click(function () {
+            window.location = 'pdf/novatime.pdf';
         });
     });
 });

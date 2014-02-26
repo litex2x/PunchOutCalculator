@@ -13,6 +13,28 @@
     margin-right: 5px;
 }
 
+.results .help {
+    font-size: 12px;
+    font-weight: bold;
+    float: left;
+    padding: 2px 5px 2px 5px;
+    text-align: center;
+    border: 1px solid #000000;
+}
+
+.results .message {
+    display: block;
+    float: left;
+    padding: 2px 0 2px 0;
+    margin-right: 5px;
+}
+
+.help:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
 .label {
     width: 90px;
     text-align: right;   
