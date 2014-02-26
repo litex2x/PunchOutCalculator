@@ -1,0 +1,37 @@
+﻿.punch-in span,
+.lunch-in span,
+.lunch-out span,
+select.hour,
+select.minute,
+select.ampm,
+#calculate-button,
+.loading,
+.results {
+    display: block;
+    float: left;
+    margin-top: 5px;
+    margin-right: 5px;
+
+}
+
+.punch-in span,
+.lunch-in span,
+.lunch-out span {
+    width: 90px;
+    text-align: right;   
+}
+
+div.punch-in,
+div.lunch-in,
+div.lunch-out,
+#calculate-button,
+.results {
+    clear: left; 
+}
+
+#calculate-button,
+.results {
+    margin-left: 95px;
+}
+
+
