@@ -62,6 +62,7 @@ $(document).ready(function () {
         $('.total-hours .hour').val('480');
         $('.total-hours .partial-hour').val('0');
         $('.results .message').text('');
+        $('.override input').prop('checked', false);
         $('.results').hide();
     });
 
