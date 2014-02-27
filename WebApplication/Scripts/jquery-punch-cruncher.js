@@ -23,8 +23,7 @@ $(document).ready(function () {
                 IsLunchOverrideEnabled: override
             }),
             complete: function (jqXHR, textStatus) {
-                $('.loading').hide();
-                $('.results').show();
+                setTimeout(clearAnimation, 2500);
             },
             beforeSend: function (jqXHR, settings) {
                 $('.loading').show();
@@ -70,3 +69,8 @@ $(document).ready(function () {
         window.location = window.location + '/pdf/novatime.pdf';
     });
 });
+
+function clearAnimation() {
+    $('.loading').hide();
+    $('.results').show();
+}

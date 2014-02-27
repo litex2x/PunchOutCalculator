@@ -123,6 +123,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="css\default.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\loading-ray.gif" />
     <Content Include="pdf\novatime.pdf" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="img\loading.gif" />
