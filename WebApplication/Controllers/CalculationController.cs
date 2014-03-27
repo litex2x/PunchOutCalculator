@@ -24,11 +24,11 @@ namespace CodePound.PunchOutCalculator.WebApplication.Controllers
                     Convert.ToInt32(request.TargetTotalMinutes),
                     Convert.ToBoolean(request.IsLunchOverrideEnabled));
 
-                return cruncher.PunchOut.ToString();
+                return cruncher.GetPunchOut().ToString();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                return ex.Message;
+                return exception.Message;
             }
         }
     }

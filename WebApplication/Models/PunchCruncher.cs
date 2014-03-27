@@ -17,87 +17,6 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
 
         public bool IsLunchOverrideEnabled { get; private set; }
 
-        public DateTime PunchOut
-        {
-            get
-            {
-                if (MissingTotal > TimeSpan.FromHours(5) && !IsLunchOverrideEnabled)
-                {
-                    throw new ApplicationException("Target hourly total is too high.");
-                }
-
-                return AdjustedLunchIn.Add(MissingTotal - TimeSpan.FromMinutes(7));
-            }
-        }
-
-        public DateTime AdjustedPunchIn
-        {
-            get
-            {
-                return PunchIn.AddMinutes(GetMinuteAdjustment(PunchIn.Minute));
-            }
-        }
-
-        public DateTime AdjustedLunchOut
-        {
-            get
-            {
-                return LunchOut.AddMinutes(GetMinuteAdjustment(LunchOut.Minute));
-            }
-        }
-
-        public DateTime AdjustedLunchIn
-        {
-            get
-            {
-                if (AdjustedLunchDuration < 30 && !IsLunchOverrideEnabled)
-                {
-                    throw new ApplicationException("Lunch punch in is too low");
-                }
-
-                return AdjustedLunchOut.AddMinutes(AdjustedLunchDuration);
-            }
-        }
-
-        public TimeSpan CurrentTotal
-        {
-            get
-            {
-                return AdjustedLunchOut - AdjustedPunchIn;
-            }
-        }
-
-        public TimeSpan MissingTotal
-        {
-            get
-            {
-                if (CurrentTotal > TimeSpan.FromHours(5) && !IsLunchOverrideEnabled)
-                {
-                    throw new ApplicationException("Lunch punch out is too high");
-                }
-
-                return TimeSpan.FromMinutes(TargetTotalMinutes) - CurrentTotal;
-            }
-        }
-
-        public int LunchDuration
-        {
-            get
-            {
-                TimeSpan actualLunch = LunchIn - LunchOut;
-
-                return (int)actualLunch.TotalMinutes;
-            }
-        }
-
-        public int AdjustedLunchDuration
-        {
-            get
-            {
-                return LunchDuration + GetMinuteAdjustment(LunchDuration);
-            }
-        }
-
         public PunchCruncher(DateTime punchIn, DateTime lunchOut, DateTime lunchIn, int targetTotalMinutes, bool isLunchOverrideEnabled)
         {
             PunchIn = punchIn;
@@ -113,10 +32,6 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
             else if (LunchIn <= LunchOut)
             {
                 throw new ApplicationException("Lunch punch in cannot be less than or equal to lunch punch out");
-            }
-            else if (CurrentTotal >= TimeSpan.FromMinutes(targetTotalMinutes))
-            {
-                throw new ApplicationException("Current hourly total is greater than or equal to target hourly total.");
             }
             else if (TargetTotalMinutes > 600 && !IsLunchOverrideEnabled)
             {
@@ -138,6 +53,70 @@ namespace CodePound.PunchOutCalculator.WebApplication.Models
             {
                 return -1 * (minute % 15);
             }
+        }
+
+        private TimeSpan GetMissingTotal(TimeSpan currentTotal)
+        {
+            if (currentTotal > TimeSpan.FromHours(5) && !IsLunchOverrideEnabled)
+            {
+                throw new ApplicationException("Lunch punch out is too high");
+            }
+            else
+            {
+                return TimeSpan.FromMinutes(TargetTotalMinutes) - currentTotal;
+            }
+        }
+
+        private DateTime GetAdjustedLunchIn(DateTime adjustedLunchOut, double adjustedLunchDuration)
+        {
+            if (adjustedLunchDuration < 30 && !IsLunchOverrideEnabled)
+            {
+                throw new ApplicationException("Lunch punch in is too low");
+            }
+            else
+            {
+                return adjustedLunchOut.AddMinutes(adjustedLunchDuration);
+            }
+        }
+
+        private DateTime GetPunchOut(DateTime adjustedLunchIn, TimeSpan missingTotal)
+        {
+            if (missingTotal > TimeSpan.FromHours(5) && !IsLunchOverrideEnabled)
+            {
+                throw new ApplicationException("Target hourly total is too high.");
+            }
+            else
+            {
+                return adjustedLunchIn.Add(missingTotal - TimeSpan.FromMinutes(7));
+            }
+        }
+
+        private TimeSpan GetCurrentTotal(DateTime adjustedLunchOut, DateTime adjustedPunchIn)
+        {
+            TimeSpan currentTotal = adjustedLunchOut - adjustedPunchIn;
+
+            if (currentTotal >= TimeSpan.FromMinutes(TargetTotalMinutes))
+            {
+                throw new ApplicationException("Current hourly total is greater than or equal to target hourly total.");
+            }
+            else
+            {
+                return currentTotal;
+            }
+        }
+
+        public DateTime GetPunchOut()
+        {
+            DateTime adjustedPunchIn = PunchIn.AddMinutes(GetMinuteAdjustment(PunchIn.Minute));
+            DateTime adjustedLunchOut = LunchOut.AddMinutes(GetMinuteAdjustment(LunchOut.Minute));
+            TimeSpan currentTotal = GetCurrentTotal(adjustedLunchOut, adjustedPunchIn);
+            double lunchDuration = (LunchIn - LunchOut).TotalMinutes;
+            double adjustedLunchDuration = lunchDuration + GetMinuteAdjustment((int)lunchDuration);
+            TimeSpan missingTotal = GetMissingTotal(currentTotal);
+            DateTime adjustedLunchIn = GetAdjustedLunchIn(adjustedLunchOut, adjustedLunchDuration);
+            DateTime punchOut = GetPunchOut(adjustedLunchIn, missingTotal);
+
+            return punchOut;
         }
     }
 }
