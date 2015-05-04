@@ -1,0 +1,23 @@
+{
+    "name": "punch-out-calculator",
+    "version": "1.1.0",
+    "description": "Punch out calculator for NOVATIME.",
+    "keywords": [
+        "NOVATIME"
+    ],
+    "authors": [
+        "ritchiemarihugh@gmail.com"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/litex2x/PunchOutCalculator",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular-bootstrap": "~0.12.1"
+    }
+}

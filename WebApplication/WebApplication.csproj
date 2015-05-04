@@ -117,13 +117,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\PunchRequest.cs" />
-    <Compile Include="Models\PunchResponse.cs" />
+    <Compile Include="Models\PunchResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="bower.json" />
     <Content Include="css\default.css" />
     <Content Include="Global.asax" />
     <Content Include="gruntfile.js" />
@@ -150,10 +153,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bower.json" />
+    <None Include="Properties\PublishProfiles\PunchOutCalculator.pubxml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\PunchOutCalculator.pubxml" />
+    <ProjectReference Include="..\NovaLogic\NovaLogic.csproj">
+      <Project>{2af735b5-ab23-433d-9a98-4c13d6b8a853}</Project>
+      <Name>NovaLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
