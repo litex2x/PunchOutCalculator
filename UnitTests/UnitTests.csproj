@@ -53,6 +53,12 @@
     <Compile Include="PunchCruncherUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NovaLogic\NovaLogic.csproj">
+      <Project>{2af735b5-ab23-433d-9a98-4c13d6b8a853}</Project>
+      <Name>NovaLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
