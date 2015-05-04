@@ -1,17 +1,13 @@
-﻿using Newtonsoft.Json;
-using CodePound.PunchOutCalculator.WebApplication.Models;
+﻿using CodePound.PunchOutCalculator.WebApplication.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using CodePound.PunchOutCalculator.NovaLogic;
 
 namespace CodePound.PunchOutCalculator.WebApplication.Controllers
 {
     public class CalculationController : ApiController
-    {   
-        public string Post(PunchRequest request)
+    {
+        public PunchResponse Post(PunchRequest request)
         {
             PunchCruncher cruncher = null;
 
@@ -24,11 +20,11 @@ namespace CodePound.PunchOutCalculator.WebApplication.Controllers
                     Convert.ToInt32(request.TargetTotalMinutes),
                     Convert.ToBoolean(request.IsLunchOverrideEnabled));
 
-                return cruncher.GetPunchOut().ToString();
+                return new PunchResponse { Result = cruncher.GetPunchOut().ToString(), IsSuccessful = true };
             }
-            catch (Exception exception)
+            catch (ArgumentException exception)
             {
-                return exception.Message;
+                return new PunchResponse { Result = exception.Message, IsSuccessful = false };
             }
         }
     }

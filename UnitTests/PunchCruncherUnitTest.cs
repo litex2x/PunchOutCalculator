@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CodePound.PunchOutCalculator.WebApplication.Models;
+using CodePound.PunchOutCalculator.NovaLogic;
 
 namespace CodePound.PunchOutCalculator.PunchOutCalculatorUnitTest
 {

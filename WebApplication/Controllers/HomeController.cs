@@ -16,5 +16,9 @@ namespace CodePound.PunchOutCalculator.WebApplication.Controllers
             return View();
         }
 
+        public ActionResult Legacy()
+        {
+            return View();
+        }
     }
 }

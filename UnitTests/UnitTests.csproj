@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CodePound.PunchOutCalculator.UnitTests</RootNamespace>
-    <AssemblyName>UnitTesta</AssemblyName>
+    <AssemblyName>CodePound.PunchOutCalculator.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -52,12 +52,6 @@
   <ItemGroup>
     <Compile Include="PunchCruncherUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebApplication\WebApplication.csproj">
-      <Project>{3d74e172-555d-483d-8f74-3a66e448e7ea}</Project>
-      <Name>WebApplication</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
